@@ -3,8 +3,6 @@ let budjet,
 	time,
 	price;
 
-// start();
-
 function start () {
 	budjet = +prompt("Какой у вас бюджет?");
 	while (isNaN(budjet) || budjet == '' || budjet == null) {
@@ -99,7 +97,7 @@ for (let key in mainList) {
 
 
 
-
+// start();
 // countMoneyDay (budjet);
 // addProduct();
 // showTimeWork (15);

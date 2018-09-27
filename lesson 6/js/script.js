@@ -1,9 +1,38 @@
-let budjet,
-	ShopName,
-	time,
-	price;
+let btnOpen = document.getElementById('open-btn'),
 
-// start();
+	nameValue = document.getElementsByClassName('name-value')[0],
+	budgetValue = document.getElementsByClassName('budget-value')[0],
+	goodsValue = document.getElementsByClassName('goods-value')[0],
+	itemsValue = document.getElementsByClassName('items-value')[0],
+	employersValue = document.getElementsByClassName('employers-value')[0],
+	discountValue = document.getElementsByClassName('discount-value')[0],
+	isopenValue = document.getElementsByClassName('isopen-value')[0],
+
+	goodsItemValue = document.getElementsByClassName('goods-item'),
+	btns = document.getElementsByTagName('button'),
+
+	chooseItem = document.querySelector('.choose-item'),
+	timeValue = document.querySelector('.time-value'),
+	countBudgetValue = document.querySelector('.count-budget-value'),
+
+	hireEmployersItem = document.querySelectorAll('.hire-employers-item');
+
+
+
+let budget,
+	name,
+	price = 3000;
+
+btnOpen.addEventListener('click', () => {
+	budget = +prompt("Какой у вас бюджет?", "");
+	while (isNaN(budget) || budget == '' || budget == null) {
+		alert('Введите корректную сумму');
+		budget = +prompt("Какой у вас бюджет?", "");
+	}
+	budgetValue.textContent = budget;
+	name = prompt("Название вашего магазина?", "").toUpperCase();
+	nameValue.textContent = name;
+});
 
 function start () {
 	budjet = +prompt("Какой у вас бюджет?");
@@ -16,8 +45,8 @@ function start () {
 }
 
 let mainList = {
-	budjet,
-	ShopName,
+	shopMoney: budget,
+	shopName: name,
 	shopGoods: [],
 	employers: {},
 	open: false,
@@ -88,24 +117,18 @@ let mainList = {
 
 };
 
-for (let key in mainList) {
-	console.log ("Наш магазин включает в себя: " + key);
-}
+// for (let key in mainList) {
+// 	console.log ("Наш магазин включает в себя: " + key);
+// }
 
 
-
-
-
-
-
-
-
+// start();
 // countMoneyDay (budjet);
 // addProduct();
 // showTimeWork (15);
 // countDiscount(3000);
 // addEmployers();
-console.log(mainList);
+// console.log(mainList);
 
 
 

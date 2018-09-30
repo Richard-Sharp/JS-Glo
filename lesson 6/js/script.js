@@ -34,15 +34,69 @@ btnOpen.addEventListener('click', () => {
 	nameValue.textContent = name;
 });
 
-function start () {
-	budjet = +prompt("Какой у вас бюджет?");
-	while (isNaN(budjet) || budjet == '' || budjet == null) {
-		alert('Введите корректную сумму');
-		budjet = +prompt("Какой у вас бюджет?");
+btns[1].addEventListener('click', () => {
+	for (let i = 0; i < goodsItemValue.length; i++) {
+		let a = goodsItemValue[i].value;
+			if ( (typeof(a)) === 'string' && (typeof(a)) != null && a.length < 50) {
+			console.log("Добавлен продукт: " + a);
+			mainList.shopGoods[i] = a;
+			goodsValue.textContent = mainList.shopGoods;
+			} else {
+			alert("Введите корректное значение!");
+			i--;
+		}		
 	}
-	ShopName = prompt("Название вашего магазина?").toUpperCase();
-	time = 22;
-}
+});
+
+chooseItem.addEventListener('change', () => {
+	let items = chooseItem.value;
+
+	if (isNaN(items) && items != '') {
+		mainList.shopItems = items.split(", ");
+		mainList.shopItems.sort();
+
+		itemsValue.textContent = mainList.shopItems;
+	}
+});
+
+timeValue.addEventListener('change', () => {
+	let time = timeValue.value;
+	if (time < 0 || time > 24) {
+			isopenValue.textContent = "На нашей планете нет такого времени!";
+			mainList.oprn = false;
+			isopenValue.style.backgroundColor = 'red';
+		} else if (time > 20 && time <= 24) {
+			isopenValue.textContent = "Магазин еще закрыт!";
+			mainList.oprn = false;
+			isopenValue.style.backgroundColor = 'red';
+		} else if (time >= 0 && time < 9) {
+			isopenValue.textContent = 'Магазин еще закрыт!';
+			mainList.oprn = false;
+			isopenValue.style.backgroundColor = 'red';
+		} else {
+			isopenValue.textContent = "Время работать!";			
+ 		mainList.open = true;
+ 		isopenValue.style.backgroundColor = 'green';
+		}
+});
+
+btns[2].addEventListener('click', () => {
+	let moneyDay = budget / 30;
+		console.log("Ваш бюджет на день: " + moneyDay);
+		countBudgetValue.value = moneyDay;
+});
+
+btns[3].addEventListener('click', () => {
+	for (let i = 0; i < hireEmployersItem.length; i++) {
+			let b = hireEmployersItem[i].value;
+			mainList.employers[i] = b;
+			
+		employersValue.textContent += mainList.employers[i] + "/";
+		}
+		
+	});
+
+
 
 let mainList = {
 	shopMoney: budget,
@@ -52,35 +106,6 @@ let mainList = {
 	open: false,
 	discount: false,
 	shopItems: [],
-	addProduct: function addProduct () {
-		for (let i = 0; i < 3; i++) {
-			let a = prompt("Какой тип товаров будем продавать?");
-			if ( (typeof(a)) === 'string' && (typeof(a)) != null && a != '' && a.length < 50) {
-			console.log("Добавлен продукт: " + a);
-			mainList.shopGoods[i] = a;
-			} else {
-			alert("Введите корректное значение!");
-			i--;
-			}
-		}
-	},
-	countMoneyDay: function countMoneyDay (money) {
-		let moneyDay = money / 30;
-		alert("Ваш бюджет на день: " + moneyDay);
-		console.log("Ваш бюджет на день: " + moneyDay);
-	},
-	showTimeWork: function showTimeWork (time) {
-		if (time < 0 || time > 24) {
-			alert( "На нашей планете нет такого времени!");
-		} else if (time > 20 && time <= 24) {
-			alert("Магазин еще закрыт!");
-		} else if (time >= 0 && time < 9) {
-			alert('Магазин еще закрыт!');	
-		} else {
-			alert("Время работать!");			
- 		mainList.open = true;
-		}
-	},
 	countDiscount: function countDiscount (price) {
 		if (mainList.discount == true) {
 			price = price*0.8;
@@ -103,12 +128,6 @@ let mainList = {
 			}
 		}
 	},
-	chooseShopItems: function chooseShopItems () {
-		let items = prompt("Перечислите через заяпятую товары", "");
-		mainList.shopItems = items.split(",");
-		mainList.shopItems.push(prompt("Добавьте еще товар:", ""));
-		mainList.shopItems.sort();
-	},
 	showShopItems: function showShopItems () {
 		mainList.shopItems.forEach( function(items, i) {
 			alert(i+1 + ": " + items);
@@ -117,9 +136,91 @@ let mainList = {
 
 };
 
+// function start () {
+// 	budjet = +prompt("Какой у вас бюджет?");
+// 	while (isNaN(budjet) || budjet == '' || budjet == null) {
+// 		alert('Введите корректную сумму');
+// 		budjet = +prompt("Какой у вас бюджет?");
+// 	}
+// 	ShopName = prompt("Название вашего магазина?").toUpperCase();
+// 	time = 22;
+// }
 // for (let key in mainList) {
 // 	console.log ("Наш магазин включает в себя: " + key);
 // }
+
+// let mainList = {
+// 	shopMoney: budget,
+// 	shopName: name,
+// 	shopGoods: [],
+// 	employers: {},
+// 	open: false,
+// 	discount: false,
+// 	shopItems: [],
+// 	addProduct: function addProduct () {
+// 		for (let i = 0; i < 3; i++) {
+// 			let a = prompt("Какой тип товаров будем продавать?");
+// 			if ( (typeof(a)) === 'string' && (typeof(a)) != null && a != '' && a.length < 50) {
+// 			console.log("Добавлен продукт: " + a);
+// 			mainList.shopGoods[i] = a;
+// 			} else {
+// 			alert("Введите корректное значение!");
+// 			i--;
+// 			}
+// 		}
+// 	},
+// 	countMoneyDay: function countMoneyDay (money) {
+// 		let moneyDay = money / 30;
+// 		alert("Ваш бюджет на день: " + moneyDay);
+// 		console.log("Ваш бюджет на день: " + moneyDay);
+// 	},
+// 	showTimeWork: function showTimeWork (time) {
+// 		if (time < 0 || time > 24) {
+// 			alert( "На нашей планете нет такого времени!");
+// 		} else if (time > 20 && time <= 24) {
+// 			alert("Магазин еще закрыт!");
+// 		} else if (time >= 0 && time < 9) {
+// 			alert('Магазин еще закрыт!');	
+// 		} else {
+// 			alert("Время работать!");			
+//  		mainList.open = true;
+// 		}
+// 	},
+// 	countDiscount: function countDiscount (price) {
+// 		if (mainList.discount == true) {
+// 			price = price*0.8;
+// 			alert("Цена со скидкой: " + price);
+// 		} else {
+// 			alert("Скидка недоступна. Цена продукта: " + price);
+
+// 		}
+// 	},
+// 	addEmployers: function addEmployers () {
+// 		for (let i = 1; i < 5; i++) {
+// 			let b = prompt("Введите имя " + i + ". сотрудника.");
+// 			if ( (typeof(b)) === 'string' && (typeof(b)) != null && b != '' && b.length < 30) {
+// 			console.log("Добавлен " + i + ". сотрудник: " + b);
+// 			let sp = " ";
+// 			mainList.employers[i] = i + sp + b;
+// 			} else {
+// 			alert("Введите корректное имя!");
+// 			i--;
+// 			}
+// 		}
+// 	},
+// 	chooseShopItems: function chooseShopItems () {
+// 		let items = prompt("Перечислите через заяпятую товары", "");
+// 		mainList.shopItems = items.split(",");
+// 		mainList.shopItems.push(prompt("Добавьте еще товар:", ""));
+// 		mainList.shopItems.sort();
+// 	},
+// 	showShopItems: function showShopItems () {
+// 		mainList.shopItems.forEach( function(items, i) {
+// 			alert(i+1 + ": " + items);
+// 		});
+// 	}
+
+// };
 
 
 // start();

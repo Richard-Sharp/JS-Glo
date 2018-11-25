@@ -1,0 +1,32 @@
+let userName = prompt("Назовите ваше имя?"),
+    userAge = +prompt("Укажите ваш возраст.");
+
+function myFirstApp(name, age) {
+    alert(`Привет, меня зовут ${name} и это моя первая программа!`);
+
+    function showMySkills() {
+        let skills = ['HTML', 'CSS', 'JavaScript'];
+
+        for (i = 0; i < skills.length; i++) {
+            document.write(`Я владею навком: ${skills[i]}; <br>`);
+        }
+    };
+    showMySkills();
+
+    function checkAge(a) {
+        if (a > 18) {
+            alert(`Вам уже есть ${a}, можете продолжить работу на сайте!`);
+        } else {
+            alert(`Вам всего ${a}! Пока еще рановато! Кури вату, друг!`);
+        }
+    }
+    checkAge(age);
+
+    function calcPow(num) {
+        return num^2;
+    }
+    calcPow(8);
+
+}
+
+myFirstApp(userName, userAge);
